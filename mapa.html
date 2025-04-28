@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa de Recorridos</title>
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111b25;
+      font-family: 'Open Sans', sans-serif;
+      color: #fff;
+    }
+    #map {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYnJpaWkiLCJhIjoiY205eXoxZWNxMDhxdTJqb2tvbWoyc21udyJ9.wEDhCBMfCXC5k5BZ45RSRg';  
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/briii/clin9w1q801b901p6c3btd3tf', 
+      center: [-100.3573, 19.4361], // Coordenadas de Zitácuaro
+      zoom: 14
+    });
+
+    map.on('load', function() {
+
+      // Ruta 1
+      map.addSource('ruta1', {
+        'type': 'geojson',
+        'data': {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [-100.35046490540606, 19.42966021324692], 
+              [-100.35737685732916, 19.432532937702533], 
+              [-100.35318327921442, 19.44113080293002]  
+            ]
+          }
+        }
+      });
+
+      map.addLayer({
+        'id': 'ruta1',
+        'type': 'line',
+        'source': 'ruta1',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': "#111b25",  
+          'line-width': 4          
+        }
+      });
+
+     const ruta1Puntos = [
+        {
+          coords: [-100.35046490540606, 19.42966021324692],
+          titulo: "Semillas",
+          enlace: "historias/semillas.html"  
+        }
+      ];
+
+      ruta1Puntos.forEach((punto) => {
+        const marcador = new mapboxgl.Marker({ color: 'beige' })
+          .setLngLat(punto.coords)
+          .addTo(map);
+
+            const popup = new mapboxgl.Popup({ offset: 25 })
+          .setHTML(`<a href="${punto.enlace}" target="_blank">${punto.titulo}</a>`);
+
+        marcador.setPopup(popup);  
+      });
+
+       map.addSource('ruta2', {
+        'type': 'geojson',
+        'data': {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [-100.36948332702698, 19.429628372691756], 
+              [-100.35714806431166, 19.43322880667068], 
+              [-100.34464903910639, 19.441804335087962]  
+            ]
+          }
+        }
+      });
+
+      map.addLayer({
+        'id': 'ruta2',
+        'type': 'line',
+        'source': 'ruta2',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#a20cfe',  
+          'line-width': 4        
+        }
+      });
+
+      const ruta2Puntos = [
+        {
+          coords: [-100.36948332702698, 19.429628372691756],
+          titulo: "Títeres",
+          enlace: "historias/titere.html" 
+        }
+      ];
+
+      ruta2Puntos.forEach((punto) => {
+        const marcador = new mapboxgl.Marker({ color: 'beige' })
+          .setLngLat(punto.coords)
+          .addTo(map);
+
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setHTML(`<a href="${punto.enlace}" target="_blank">${punto.titulo}</a>`);
+
+        marcador.setPopup(popup);  
+      });
+
+      // Ruta 3
+      map.addSource('ruta3', {
+        'type': 'geojson',
+        'data': {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [
+              [-100.3603647502278, 19.443047180277407], 
+              [-100.35931981960138, 19.43843053075693], 
+              [-100.35512156045056, 19.436589102785854]  
+            ]
+          }
+        }
+      });
+
+      map.addLayer({
+        'id': 'ruta3',
+        'type': 'line',
+        'source': 'ruta3',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#FF5733',  
+          'line-width': 4          
+        }
+      });
+
+      const ruta3Puntos = [
+        {
+          coords: [-100.3603647502278, 19.443047180277407],
+          titulo: "Plata",
+          enlace: "historias/plata.html"  
+        }
+      ];
+
+      ruta3Puntos.forEach((punto) => {
+        const marcador = new mapboxgl.Marker({ color: 'beige' })
+          .setLngLat(punto.coords)
+          .addTo(map);
+
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setHTML(`<a href="${punto.enlace}" target="_blank">${punto.titulo}</a>`);
+
+        marcador.setPopup(popup);  
+      });
+
+    });
+  </script>
+
+</body>
+</html>
